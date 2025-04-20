@@ -24,7 +24,6 @@ export const transactionStore = create()(
       } catch (error) {
         toast.error("Could not find any transaction");
         console.log(error.message);
-        set({ transactions: [] });
       } finally {
         set({ isTransactionsLoading: false });
       }
