@@ -45,16 +45,16 @@ export const newTransaction = async (req, res) => {
 
 export const getTransactions = async (req, res) => {
   const { _id: userId } = req.user;
-  const { start, end, min, max } = req.query;
+  const { from, to, min, max } = req.query;
 
   const query = {
     $or: [{ from: userId }, { to: userId }],
   };
-  if (start || end) {
+  if (from || to) {
     query.date = {};
 
-    if (start) query.date.$gte = new Date(start);
-    if (end) query.date.$lte = new Date(end);
+    if (from) query.date.$gte = new Date(from);
+    if (to) query.date.$lte = new Date(to);
   }
   if (min || max) {
     query.amount = {};
@@ -102,6 +102,6 @@ export const updateTransaction = async (req, res) => {
       .json({ message: "Success", data: updatedTransaction });
   } catch (error) {
     res.status(500).json({ error: "Failed to update the transaction" });
-    console.log("Error in updateTransaction controller", error);
+    console.log("Error in updateTransaction controller", error.TypeError);
   }
 };

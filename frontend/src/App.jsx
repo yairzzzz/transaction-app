@@ -32,8 +32,9 @@ function App() {
   }
 
   return (
-    <div data-theme={theme}>
+    <div data-theme={theme} className="h-screen w-screen">
       <Navbar />
+
       <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <LoginPage />} />
         <Route

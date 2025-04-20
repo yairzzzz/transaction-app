@@ -1,8 +1,11 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/",
+export const authInstance = axios.create({
+  baseURL: "http://localhost:5000/api/auth/",
   withCredentials: true,
 });
 
-export default axiosInstance;
+export const transactionInstance = axios.create({
+  baseURL: "http://localhost:5000/api/transaction/",
+  withCredentials: true,
+});

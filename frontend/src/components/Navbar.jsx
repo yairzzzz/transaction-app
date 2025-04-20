@@ -1,4 +1,4 @@
-import { Bitcoin, UserRoundCog, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import daisyuiThemes from "../constants/daisyuiThemes";
@@ -19,24 +19,16 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 h-16">
         <div className="flex items-center justify-between h-full">
-          <Link to={"/"} className="hover:opacity-80 transition-all">
-            <div className="flex p-2 space-x-2 items-center">
-              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <span className=" text-2xl text-primary ">
-                  <Bitcoin />
-                </span>
-              </div>
-              <p className="text-xl font-semibold tracking-wide">Malaka</p>
-            </div>
-          </Link>
-
-          <div className="flex items-center gap-2  ">
-            <Link to={"/"} className="  btn btn-sm gap-2 transition-colors">
-              <UserRoundCog className="size-5" />
-              <span className="hidden sm:inline text-base font-semibold">
-                Settings
-              </span>
+          <h1>
+            <Link to={"/"} className="hover:opacity-80 transition-all">
+              <img
+                src="https://etherscan.io/assets/svg/logos/logo-etherscan.svg?v=0.0.5"
+                alt="Etherscan logo"
+                className="size-40"
+              />
             </Link>
+          </h1>
+          <div className="flex items-center gap-2  ">
             {authUser && (
               <button
                 onClick={handleLogout}

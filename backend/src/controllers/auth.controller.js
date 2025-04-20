@@ -13,7 +13,7 @@ export const register = async (req, res) => {
     if (password.length < 6) {
       return res
         .status(400)
-        .json({ message: "Password length must be bigger than 6 chars" });
+        .json({ message: "Password length must be bigger than 6 characters" });
     }
     const user = await User.findOne({ email });
     if (user) {
