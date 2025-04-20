@@ -12,12 +12,14 @@ export const transactionStore = create()(
       set({ isTransactionsLoading: true });
 
       try {
-        const response = await transactionInstance("get", {
+        const response = await transactionInstance.get("get", {
           params: {
             from: data?.from,
             to: data?.to,
             min: data?.min,
             max: data?.max,
+            page: data?.page,
+            limit: data?.limit,
           },
         });
         set({ transactions: response.data.data });

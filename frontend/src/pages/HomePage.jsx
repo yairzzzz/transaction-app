@@ -3,6 +3,7 @@ import { Rotate3d, Loader, Globe, Pencil, X, Check } from "lucide-react";
 import { transactionStore } from "../store/transactionStore";
 import { useEffect, useState } from "react";
 import Filter from "../components/Filter";
+import Pagination from "../components/Pagination";
 import convertDate from "../lib/convertDate";
 
 const HomePage = () => {
@@ -60,15 +61,17 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+        {/* Filter Component */}
         <Filter />
+        {/* Pagination Component*/}
+        <div className="w-full p-4">
+          <Pagination />
+        </div>
         <div className="overflow-x-auto w-full grow">
-          {/* Filter Options */}
-
           {/* Table starts */}
-          <table className="table w-full min-w-[1000px] table-zebra table-xs lg:table-md">
+          <table className="table w-full min-w-[1000px] table-zebra table-md">
             <thead>
-              <tr>
-                <th></th>
+              <tr className="text-center">
                 <th>Hash</th>
                 <th>Method</th>
                 <th>Date</th>
@@ -88,9 +91,8 @@ const HomePage = () => {
                   </td>
                 </tr>
               ) : (
-                transactions.map((item, i) => (
+                transactions.map((item) => (
                   <tr key={item._id}>
-                    <th>{i + 1}</th>
                     <td className="max-w-[200px] truncate" title={item.hash}>
                       {item.hash}
                     </td>

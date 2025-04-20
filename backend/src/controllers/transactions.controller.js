@@ -45,7 +45,7 @@ export const newTransaction = async (req, res) => {
 
 export const getTransactions = async (req, res) => {
   const { _id: userId } = req.user;
-  const { from, to, min, max } = req.query;
+  const { from, to, min, max, page, limit } = req.query;
 
   const query = {
     $or: [{ from: userId }, { to: userId }],
@@ -62,8 +62,17 @@ export const getTransactions = async (req, res) => {
     if (min) query.amount.$gte = parseFloat(min);
     if (max) query.amount.$lte = parseFloat(max);
   }
+
+  const safePage = Math.max(parseInt(page || "1", 10), 1);
+  const safeLimit = Math.max(parseInt(limit || "10", 10), 1);
+
+  const skip = (safePage - 1) * safeLimit;
+
   try {
-    const transactions = await Transaction.find(query).sort({ date: -1 });
+    const transactions = await Transaction.find(query)
+      .sort({ date: -1 })
+      .skip(skip)
+      .limit(safeLimit);
 
     if (!transactions.length) {
       return res.status(404).json({ error: "Could not find any transaction" });
@@ -72,7 +81,7 @@ export const getTransactions = async (req, res) => {
     res.status(200).json({ message: "Success", data: transactions });
   } catch (error) {
     res.status(500).json({ error: "Failed to retrieve transactions" });
-    console.log("Error in getTransactions controller", error);
+    console.log("Error in getTransactions controller", error.message);
   }
 };
 
