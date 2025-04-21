@@ -1,3 +1,4 @@
+import eth from "../images/ethereum.png";
 import {
   Bitcoin,
   User,
@@ -40,38 +41,19 @@ function Register() {
   return (
     <div className="h-screen grid lg:grid-cols-2">
       {/* left side */}
-      <div className="block lg:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <Bitcoin
-            key={i}
-            className="absolute text-primary/20 fall"
-            style={{
-              top: `-50px`, // start off-screen
-              left: `${Math.random() * 100}%`,
-              fontSize: `${Math.floor(Math.random() * 24) + 20}px`,
-              animationDuration: `${4 + Math.random() * 3}s`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
+      <div className="block lg:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden"></div>
       <div className="flex flex-col justify-center items-center p-6 sm:p-12 ">
-        {/* BTC icon */}
-        <div className="size-15 rounded-xl bg-primary/10 flex items-center justify-center animate-bounce">
-          <span className=" text-2xl text-primary ">
-            <Bitcoin className="size-10" />
-          </span>
-        </div>
+        <img src={eth} alt="Etherum Logo" className="size-18 animate-bounce" />
 
         <div className="text-center max-w-xl mt-10 mb-6">
           <h1 className="text-3xl sm:text-4xl font-bold text-primary mb-5">
-            Master the Crypto Market with Confidence
+            Master the Ethereum Network with Confidence
           </h1>
           <p className="text-base-content text-lg mb-5">
-            MalakaCoin gives you real-time prices, powerful charts, and the
-            tools to stay ahead. <br />
+            Etherscan lets you explore Ethereum transactions with clarity,
+            speed, and precision. <br />
             <span className="text-secondary font-semibold ">
-              Register now and take control of your crypto journey.
+              Register now and take control of your blockchain insights.
             </span>
           </p>
         </div>

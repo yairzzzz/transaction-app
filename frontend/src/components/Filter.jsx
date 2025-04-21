@@ -1,37 +1,30 @@
 import { ListFilter } from "lucide-react";
-import { useState } from "react";
+
 import { transactionStore } from "../store/transactionStore";
 import toast from "react-hot-toast";
 
 const Filter = () => {
-  const [inputFields, setInputFields] = useState({
-    from: "",
-    to: "",
-    min: "",
-    max: "",
-  });
-
-  const { getTransactions } = transactionStore();
+  const { getTransactions, filterQuery, setFilterQuery } = transactionStore();
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-
-    if (new Date(inputFields.from) >= new Date(inputFields.to)) {
+    transactionStore.getState().filterQuery;
+    if (new Date(filterQuery.from) >= new Date(filterQuery.to)) {
       return toast.error("Please select valid dates");
     }
-    if (inputFields.min > inputFields.max) {
+    if (filterQuery.min > filterQuery.max) {
       return toast.error("Please select valid amount filtering");
     }
 
     if (
-      !inputFields.from &&
-      !inputFields.to &&
-      !inputFields.min &&
-      !inputFields.max
+      !filterQuery.from &&
+      !filterQuery.to &&
+      !filterQuery.min &&
+      !filterQuery.max
     ) {
       return toast.error("Please select atleast one filtering");
     }
-    getTransactions(inputFields);
+    getTransactions(filterQuery);
   };
 
   return (
@@ -45,10 +38,8 @@ const Filter = () => {
           <label className="form-control ">
             <span className="label-text">From</span>
             <input
-              value={inputFields.from}
-              onChange={(e) =>
-                setInputFields({ ...inputFields, from: e.target.value })
-              }
+              value={filterQuery.from}
+              onChange={(e) => setFilterQuery({ from: e.target.value })}
               id="from-date"
               type="date"
               className="input input-sm w-full"
@@ -58,10 +49,8 @@ const Filter = () => {
           <label className="form-control ">
             <span className="label-text">To</span>
             <input
-              value={inputFields.to}
-              onChange={(e) =>
-                setInputFields({ ...inputFields, to: e.target.value })
-              }
+              value={filterQuery.to}
+              onChange={(e) => setFilterQuery({ to: e.target.value })}
               id="to-date"
               type="date"
               className="input input-sm w-full"
@@ -71,10 +60,8 @@ const Filter = () => {
           <label className="form-control ">
             <span className="label-text">Min Amount</span>
             <input
-              value={inputFields.min}
-              onChange={(e) =>
-                setInputFields({ ...inputFields, min: +e.target.value })
-              }
+              value={filterQuery.min}
+              onChange={(e) => setFilterQuery({ min: +e.target.value })}
               id="min-amount"
               type="number"
               className="input input-sm w-full"
@@ -84,10 +71,8 @@ const Filter = () => {
           <label className="form-control ">
             <span className="label-text">Max Amount</span>
             <input
-              value={inputFields.max}
-              onChange={(e) =>
-                setInputFields({ ...inputFields, max: +e.target.value })
-              }
+              value={filterQuery.max}
+              onChange={(e) => setFilterQuery({ max: +e.target.value })}
               id="max-amount"
               type="number"
               className="input input-sm w-full"

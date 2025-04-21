@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import { authStore } from "./store/authStore";
 import { useEffect } from "react";
 import { LoaderCircle } from "lucide-react";
+import TransactionsNotFound from "./components/TransactionsNotFound";
 
 function App() {
   const { authUser, checkAuth, isCheckingAuth } = authStore();
@@ -46,6 +47,7 @@ function App() {
           element={!authUser ? <Register /> : <HomePage />}
         />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/generate" element={<TransactionsNotFound />} />
       </Routes>
       <Toaster position="bottom-center" reverseOrder={false} />
     </div>

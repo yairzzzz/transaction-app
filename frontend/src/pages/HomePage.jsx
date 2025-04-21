@@ -1,23 +1,18 @@
-import eth from "../images/ethereum.png";
 import { Rotate3d, Loader, Globe, Pencil, X, Check } from "lucide-react";
 import { transactionStore } from "../store/transactionStore";
 import { useEffect, useState } from "react";
 import Filter from "../components/Filter";
 import Pagination from "../components/Pagination";
+import TransactionsNotFound from "../components/TransactionsNotFound";
 import convertDate from "../lib/convertDate";
+import EthData from "../components/EthData";
 
 const HomePage = () => {
-  const { getTransactions, transactions, isTransactionsLoading, editAmount } =
+  const { transactions, getTransactions, isTransactionsLoading, editAmount } =
     transactionStore();
 
   const [editingId, setEditingId] = useState(null);
   const [editedAmount, setEditedAmount] = useState("");
-
-  useEffect(() => {
-    getTransactions();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,42 +20,19 @@ const HomePage = () => {
     setEditingId(null);
   };
 
+  useEffect(() => {
+    getTransactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!transactions.length && !isTransactionsLoading) {
+    return <TransactionsNotFound />;
+  }
+
   return (
     <div className="h-screen flex items-center justify-center">
       <section className=" flex flex-col h-[90%] bg-base-200 rounded-2xl shadow-2xl overflow-hidden">
-        <div className="flex flex-col  items-start md:flex-row md:justify-between py-5 px-4 mb-4 sticky space-y-2 border-b-1 border-base-300 ">
-          <div className="flex items-center space-x-2">
-            <img src={eth} alt="Etherum Logo" className="size-8" />
-
-            <div className="flex flex-col">
-              <span className="text-gray-400">ETHER PRICE</span>
-              <span className="font-bold">
-                {" "}
-                $1,5876.36{" "}
-                <span className="text-gray-400 font-normal">
-                  @ 0.018774 BTC
-                </span>{" "}
-                <span className="text-red-600 font-normal">(-4.8%)</span>
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Globe className="size-8 " />
-
-            <div className="flex flex-col">
-              <span className="text-gray-400">MARKET CAP</span>
-              <span className="font-bold"> $191,595,177,031.00</span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Rotate3d className="size-8 " />
-
-            <div className="flex flex-col">
-              <span className="text-gray-400">TRANSACTIONS</span>
-              <span className="font-bold"> 2,771.90M</span>
-            </div>
-          </div>
-        </div>
+        <EthData />
         {/* Filter Component */}
         <Filter />
         {/* Pagination Component*/}
@@ -71,7 +43,7 @@ const HomePage = () => {
           {/* Table starts */}
           <table className="table w-full min-w-[1000px] table-zebra table-md">
             <thead>
-              <tr className="text-center">
+              <tr className="text-center sticky">
                 <th>Hash</th>
                 <th>Method</th>
                 <th>Date</th>

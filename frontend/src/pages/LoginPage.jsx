@@ -1,12 +1,5 @@
-import {
-  Bitcoin,
-  User,
-  Mail,
-  LockKeyhole,
-  LoaderCircle,
-  Eye,
-  EyeOff,
-} from "lucide-react";
+import eth from "../images/ethereum.png";
+import { Mail, LockKeyhole, LoaderCircle, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -39,38 +32,20 @@ function LoginPage() {
   return (
     <div className="h-screen grid lg:grid-cols-2">
       {/* left side */}
-      <div className="block lg:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <Bitcoin
-            key={i}
-            className="absolute text-primary/20 fall"
-            style={{
-              top: `-50px`, // start off-screen
-              left: `${Math.random() * 100}%`,
-              fontSize: `${Math.floor(Math.random() * 24) + 20}px`,
-              animationDuration: `${4 + Math.random() * 3}s`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
+      <div className="block lg:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden"></div>
       <div className="flex flex-col justify-center items-center p-6 sm:p-12 ">
         {/* BTC icon */}
-        <div className="size-15 rounded-xl bg-primary/10 flex items-center justify-center animate-bounce">
-          <span className=" text-2xl text-primary ">
-            <Bitcoin className="size-10" />
-          </span>
-        </div>
+        <img src={eth} alt="Etherum Logo" className="size-18 animate-bounce" />
 
         <div className="text-center max-w-xl mt-10 mb-6">
           <h1 className="text-3xl sm:text-4xl font-bold text-primary mb-5">
-            Welcome Back to MalakaCoin
+            Welcome Back to Etherscan
           </h1>
           <p className="text-base-content text-lg mb-5">
-            Log in to track prices, manage your portfolio, and access live
-            crypto data. <br />
+            Log in to explore Ethereum transactions, manage your history, and
+            access detailed blockchain data. <br />
             <span className="text-secondary font-semibold">
-              Your journey to smarter trading continues here.
+              Your journey through the blockchain continues here.
             </span>
           </p>
         </div>

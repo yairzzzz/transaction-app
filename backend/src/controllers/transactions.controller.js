@@ -78,7 +78,9 @@ export const getTransactions = async (req, res) => {
       return res.status(404).json({ error: "Could not find any transaction" });
     }
 
-    res.status(200).json({ message: "Success", data: transactions });
+    const count = await Transaction.countDocuments(query);
+
+    res.status(200).json({ message: "Success", data: transactions, count });
   } catch (error) {
     res.status(500).json({ error: "Failed to retrieve transactions" });
     console.log("Error in getTransactions controller", error.message);
@@ -112,5 +114,49 @@ export const updateTransaction = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Failed to update the transaction" });
     console.log("Error in updateTransaction controller", error.TypeError);
+  }
+};
+
+export const generateDummyTransactions = async (req, res) => {
+  const { _id: from } = req.user;
+
+  const { count, method } = req.body;
+
+  const to = "68060e2c0989f42e1297ea43"; // dummy user._id to send transactions to
+
+  // method, from, to, amount, fee, date - DB required
+
+  const transactions = [];
+
+  for (let i = 0; i < count; i++) {
+    const amount = Math.ceil(Math.random() * 100000);
+    const fee = Math.random() * 20;
+    const hash = `0x${crypto.randomBytes(32).toString("hex")}`;
+
+    const start = new Date(2020, 0, 1).getTime();
+    const end = new Date().getTime();
+    const randomDate = start + Math.ceil(Math.random() * (end - start));
+    const date = new Date(randomDate).toISOString();
+
+    transactions.push({
+      method,
+      from,
+      to,
+      amount,
+      fee,
+      date,
+      hash,
+    });
+  }
+
+  try {
+    const newTransactions = await Transaction.insertMany(transactions);
+
+    res.status(200).json({ message: "Success", data: newTransactions });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Internal server error", message: error.message });
+    console.log("Error in generateDummyTransactions controller", error.message);
   }
 };

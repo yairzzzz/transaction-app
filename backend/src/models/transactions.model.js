@@ -33,9 +33,5 @@ const transactionsSchema = new mongoose.Schema({
   },
 });
 
-transactionsSchema.index({ hash: 1 });
-transactionsSchema.index({ from: 1 });
-transactionsSchema.index({ to: 1 });
-
 const Transaction = mongoose.model("Transaction", transactionsSchema);
 export default Transaction;

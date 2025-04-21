@@ -1,4 +1,4 @@
-import { LogOut } from "lucide-react";
+import { LogOut, FilePlus } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import daisyuiThemes from "../constants/daisyuiThemes";
@@ -30,15 +30,25 @@ const Navbar = () => {
           </h1>
           <div className="flex items-center gap-2  ">
             {authUser && (
-              <button
-                onClick={handleLogout}
-                className="  btn btn-sm gap-2 transition-colors"
-              >
-                <LogOut className="size-5" />
-                <span className="hidden sm:inline text-base font-semibold">
-                  Logout
-                </span>
-              </button>
+              <div className="flex gap-2">
+                <Link to={"/generate"}>
+                  <button className="  btn btn-sm gap-2 transition-colors">
+                    <FilePlus className="size-5" />
+                    <span className="hidden sm:inline text-base font-semibold">
+                      Generate
+                    </span>
+                  </button>
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="  btn btn-sm gap-2 transition-colors"
+                >
+                  <LogOut className="size-5" />
+                  <span className="hidden sm:inline text-base font-semibold">
+                    Logout
+                  </span>
+                </button>
+              </div>
             )}
             {/* Change theme button */}
 
