@@ -1,48 +1,69 @@
-✨ Features
-🔐 JWT Authentication – login-protected dashboard with secure access
+# 📊 Crypto Transactions Dashboard
 
-📊 Transaction Table – view crypto transactions with clean layout
+A full-stack web application for securely managing and viewing cryptocurrency transactions with filtering, inline editing, theming, and pagination.
 
-🔎 Advanced Filtering – by date range, min/max amount
+---
 
-✏️ Inline Editing – edit transaction amounts in place
+## 🔗 Live Demo
 
-🎨 Responsive UI – mobile-friendly and fast using Tailwind & DaisyUI
+👉 [View Live App](https://transaction-app-y77v.onrender.com)
 
-🌙 Dark/Light Theme (optional)
+---
 
-📦 REST API Integration – connects to backend via Axios instance
+## ✨ Features
 
-🔧 Tech Stack
-Frontend
-React + Vite
+- 🔐 **JWT Authentication** – Secure login-protected dashboard
+- 📊 **Transaction Table** – View formatted crypto transactions
+- 📄 **Dynamic Pagination** – Efficient browsing through transaction history
+- 🔎 **Advanced Filtering** – Filter by date range, minimum and maximum amounts
+- ✏️ **Inline Editing** – Edit transaction amounts directly in the table
+- 🎨 **Responsive UI** – Fully responsive layout using Tailwind CSS and DaisyUI
+- 🌙 **Theme Support** – Choose from 34 built-in DaisyUI themes
+- 📦 **REST API Integration** – Frontend communicates with backend using Axios
 
-Zustand (state management)
+---
 
-Tailwind CSS + DaisyUI (UI framework)
+## 🧰 Tech Stack
 
-Axios (API client)
+### 🖥️ Frontend
+- React (with Vite)
+- Zustand (state management)
+- Tailwind CSS + DaisyUI + MUI (for UI components)
+- Axios (API client)
+- Lucide Icons
 
-Lucide (icons)
+### 🛠️ Backend
+- Node.js + Express
+- MongoDB (via Mongoose)
+- JWT (Authentication & Authorization)
 
-Backend
-Node.js + Express
+---
 
-MongoDB (via Mongoose)
+## 🔐 Authentication Flow
 
-JWT (Authentication & Authorization)
+- User logs in and receives a signed JWT token
+- Token is stored in `localStorage`
+- All protected routes validate the token on request
+- Backend verifies the token for authorization
 
- Authentication
-User logs in and receives a JWT token
+---
 
-Token is stored in localStorage or memory
+## 📝 /todo
 
-All protected routes require the token
+- [ ] Implement **rate limiting** (e.g., `express-rate-limit`) to prevent request spam
+- [ ] Add **validation middleware** to sanitize user input and block malformed data
+- [ ] Apply **authorization checks** on sensitive routes (e.g., only allow editing own transactions)
+- [ ] Protect MongoDB from abuse (e.g., schema constraints, input length limits)
+- [ ] Add basic **logging** for failed requests and suspicious activity
+- [ ] Set up **helmet** middleware for HTTP headers security
+- [ ] Optional: Add **CAPTCHA** or throttling on auth routes
 
-Backend validates token for authorization.
 
+## 📚 About This Project
 
-📚 About This Project
-This project was originally a task given to a friend during a job interview. I decided to take it on as a personal challenge to test my own skills, deepen my understanding of full-stack development, and push my limits as a developer.
+This project was originally assigned to a friend during a job interview. I chose to take on the challenge myself to test and push my skills in full-stack development.
 
-I learned a lot throughout the process — from setting up authentication and clean UI state management to implementing dynamic table editing and filtering — and I genuinely enjoyed building this app.
+Throughout the process, I built out features including authentication, secure REST APIs, responsive layouts, dynamic UI state management, and editable, filterable data tables. I enjoyed working through the entire stack — from backend routes to frontend polish — and learned a great deal in the process.
+
+---
+
