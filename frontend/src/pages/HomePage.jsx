@@ -79,7 +79,7 @@ const HomePage = () => {
                       {/* Editing Amount Logic */}
                       {editingId !== item._id ? (
                         <div className="truncate flex items-center justify-between gap-2">
-                          <span>{item.amount}</span>
+                          <span>${Number(item.amount).toLocaleString()}</span>
                           <button
                             onClick={() => {
                               setEditingId(item._id);
@@ -117,7 +117,10 @@ const HomePage = () => {
                         </form>
                       )}
                     </td>
-                    <td className="max-w-[200px] truncate"> {item.fee}</td>
+                    <td className="max-w-[200px] truncate">
+                      {" "}
+                      ${+item.fee.toFixed(2)}
+                    </td>
                   </tr>
                 ))
               )}

@@ -11,6 +11,7 @@ import { authStore } from "./store/authStore";
 import { useEffect } from "react";
 import { LoaderCircle } from "lucide-react";
 import TransactionsNotFound from "./components/TransactionsNotFound";
+import GeneratePage from "./pages/GeneratePage";
 
 function App() {
   const { authUser, checkAuth, isCheckingAuth } = authStore();
@@ -47,7 +48,7 @@ function App() {
           element={!authUser ? <Register /> : <HomePage />}
         />
         <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/generate" element={<TransactionsNotFound />} />
+        <Route path="/generate" element={<GeneratePage />} />
       </Routes>
       <Toaster position="bottom-center" reverseOrder={false} />
     </div>
