@@ -32,7 +32,11 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 app.listen(PORT, () => {
-  console.log("Listening on port 5000");
+  console.log(`Listening on port ${PORT}`);
   connectDB();
 });
