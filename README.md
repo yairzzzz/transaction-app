@@ -1,52 +1,58 @@
-✨ Features
-🔐 JWT Authentication – login-protected dashboard with secure access
+# 📊 Crypto Transactions Dashboard
 
-📊 Transaction Table – view crypto transactions with clean layout
+A full-stack web application for securely managing and viewing cryptocurrency transactions with filtering, inline editing, theming, and pagination.
 
-📄 Includes dynamic pagination for efficient data browsing
+---
 
-🔎 Advanced Filtering – by date range, min/max amount
+## 🔗 Live Demo
 
-✏️ Inline Editing – edit transaction amounts in place
+👉 [View Live App](https://transaction-app-y77v.onrender.com)
 
-🎨 Responsive UI – mobile-friendly and fast using Tailwind & DaisyUI
+---
 
-🌙 Includes 34 built-in DaisyUI themes
+## ✨ Features
 
-📦 REST API Integration – connects to backend via Axios instance
+- 🔐 **JWT Authentication** – Secure login-protected dashboard
+- 📊 **Transaction Table** – View formatted crypto transactions
+- 📄 **Dynamic Pagination** – Efficient browsing through transaction history
+- 🔎 **Advanced Filtering** – Filter by date range, minimum and maximum amounts
+- ✏️ **Inline Editing** – Edit transaction amounts directly in the table
+- 🎨 **Responsive UI** – Fully responsive layout using Tailwind CSS and DaisyUI
+- 🌙 **Theme Support** – Choose from 34 built-in DaisyUI themes
+- 📦 **REST API Integration** – Frontend communicates with backend using Axios
 
-🔧 Tech Stack
-Frontend
-React + Vite
+---
 
-Zustand (state management)
+## 🧰 Tech Stack
 
-Tailwind CSS + DaisyUI (UI framework) + MUI
+### 🖥️ Frontend
+- React (with Vite)
+- Zustand (state management)
+- Tailwind CSS + DaisyUI + MUI (for UI components)
+- Axios (API client)
+- Lucide Icons
 
-Axios (API client)
+### 🛠️ Backend
+- Node.js + Express
+- MongoDB (via Mongoose)
+- JWT (Authentication & Authorization)
 
-Lucide (icons)
+---
 
-Backend
-Node.js + Express
+## 🔐 Authentication Flow
 
-MongoDB (via Mongoose)
+- User logs in and receives a signed JWT token
+- Token is stored in `localStorage`
+- All protected routes validate the token on request
+- Backend verifies the token for authorization
 
-JWT (Authentication & Authorization)
+---
 
- Authentication
-User logs in and receives a JWT token
+## 📚 About This Project
 
-Token is stored in localStorage 
+This project was originally assigned to a friend during a job interview. I chose to take on the challenge myself to test and push my skills in full-stack development.
 
-All protected routes require the token
+Throughout the process, I built out features including authentication, secure REST APIs, responsive layouts, dynamic UI state management, and editable, filterable data tables. I enjoyed working through the entire stack — from backend routes to frontend polish — and learned a great deal in the process.
 
-Backend validates token for authorization.
+---
 
-Deployed add URL: https://transaction-app-y77v.onrender.com/
-
-
-📚 About This Project
-This project was originally a task given to a friend during a job interview. I decided to take it on as a personal challenge to test my own skills, deepen my understanding of full-stack development, and push my limits as a developer.
-
-I learned a lot throughout the process — from setting up authentication and clean UI state management to implementing dynamic table editing and filtering — and I genuinely enjoyed building this app.
