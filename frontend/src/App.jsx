@@ -47,8 +47,11 @@ function App() {
           path="/register"
           element={!authUser ? <Register /> : <HomePage />}
         />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/generate" element={<GeneratePage />} />
+
+        <Route
+          path="/generate"
+          element={!authUser ? <LoginPage /> : <GeneratePage />}
+        />
       </Routes>
       <Toaster position="bottom-center" reverseOrder={false} />
     </div>
