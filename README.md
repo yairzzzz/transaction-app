@@ -52,7 +52,7 @@ A full-stack web application for securely managing and viewing cryptocurrency tr
 
 - [ ] Implement **rate limiting** (e.g., `express-rate-limit`) to prevent request spam
 - [ ] Add **validation middleware** to sanitize user input and block malformed data
-- [ ] Apply **authorization checks** on sensitive routes (e.g., only allow editing/deleting own transactions)
+- [ ] Apply **authorization checks** on sensitive routes (e.g., only allow editing own transactions)
 - [ ] Protect MongoDB from abuse (e.g., schema constraints, input length limits)
 - [ ] Add basic **logging** for failed requests and suspicious activity
 - [ ] Set up **helmet** middleware for HTTP headers security
