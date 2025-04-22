@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.PROD ? "/api" : "http://localhost:5000/api/";
+const baseURL = import.meta.env.PROD ? "/api/" : "http://localhost:5000/api/";
 
 export const authInstance = axios.create({
   baseURL: `${baseURL}auth`,
