@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
-import { connectDB } from "./lib/db.js";
-import authRoutes from "./routes/auth.routes.js";
-import transactionRoutes from "./routes/transaction.routes.js";
+import { connectDB } from "./src/lib/db.js";
+import authRoutes from "./src/routes/auth.routes.js";
+import transactionRoutes from "./src/routes/transaction.routes.js";
 import cookieParser from "cookie-parser";
 import path from "path";
 
