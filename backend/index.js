@@ -9,6 +9,7 @@ import path from "path";
 const app = express();
 
 const __dirname = path.resolve();
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -31,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
   console.log("Listening on port 5000");
   connectDB();
 });
