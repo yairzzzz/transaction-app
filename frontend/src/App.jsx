@@ -2,7 +2,6 @@ import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import SettingsPage from "./pages/SettingsPage";
 
 import { Routes, Route } from "react-router-dom";
 import { themeStore } from "./store/themeStore";
@@ -20,6 +19,11 @@ function App() {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  useEffect(() => {
+    console.log("authUser =", authUser);
+    console.log("isCheckingAuth =", isCheckingAuth);
+  }, [authUser, isCheckingAuth]);
 
   if (isCheckingAuth && !authUser) {
     return (
@@ -53,6 +57,7 @@ function App() {
           element={!authUser ? <LoginPage /> : <GeneratePage />}
         />
       </Routes>
+
       <Toaster position="bottom-center" reverseOrder={false} />
     </div>
   );
