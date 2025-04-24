@@ -26,6 +26,7 @@ A full-stack web application for securely managing and viewing cryptocurrency tr
 ## 🧰 Tech Stack
 
 ### 🖥️ Frontend
+
 - React (with Vite)
 - Zustand (state management)
 - Tailwind CSS + DaisyUI + MUI (for UI components)
@@ -33,6 +34,7 @@ A full-stack web application for securely managing and viewing cryptocurrency tr
 - Lucide Icons
 
 ### 🛠️ Backend
+
 - Node.js + Express
 - MongoDB (via Mongoose)
 - JWT (Authentication & Authorization)
@@ -58,7 +60,6 @@ A full-stack web application for securely managing and viewing cryptocurrency tr
 - [ ] Set up **helmet** middleware for HTTP headers security
 - [ ] Optional: Add **CAPTCHA** or throttling on auth routes
 
-
 ## 📚 About This Project
 
 This project was originally assigned to a friend during a job interview. I chose to take on the challenge myself to test and push my skills in full-stack development.
@@ -66,4 +67,3 @@ This project was originally assigned to a friend during a job interview. I chose
 Throughout the process, I built out features including authentication, secure REST APIs, responsive layouts, dynamic UI state management, and editable, filterable data tables. I enjoyed working through the entire stack — from backend routes to frontend polish — and learned a great deal in the process.
 
 ---
-
