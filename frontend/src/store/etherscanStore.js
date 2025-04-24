@@ -1,6 +1,6 @@
 import axios from "axios";
 import { create } from "zustand";
-const apiKey = import.meta.env.VITE_ETHERSCAN_KEY;
+const apiKey = "89QW4ZJAHA9PAQ2Y97C96GFA9UHT9YITWH"; //public etherscan api key
 
 export const etherscanStore = create((set) => ({
   ethUsdLastPrice: null,
