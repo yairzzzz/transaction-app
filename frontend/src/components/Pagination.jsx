@@ -22,6 +22,7 @@ export default function Pagination() {
     setRowsPerPage(newLimit);
     setFilterQuery({ limit: newLimit });
     const currentQuery = { ...filterQuery, limit: newLimit };
+
     if (page > 0) {
       setPage(0);
       currentQuery.page = 0;

@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 export const getTransactions = async (req, res) => {
   const { _id: userId } = req.user;
-  const { from, to, min, max, page, limit } = req.query;
+  let { from, to, min, max, page, limit } = req.query;
 
   const query = {
     $or: [{ from: userId }, { to: userId }],
@@ -20,10 +20,13 @@ export const getTransactions = async (req, res) => {
   }
 
   if (min || max) {
+    min = parseInt(min);
+    max = parseInt(max);
+
     query.amount = {};
 
-    if (min) query.amount.$gte = +min;
-    if (max) query.amount.$lte = +max;
+    if (min) query.amount.$gte = min;
+    if (max) query.amount.$lte = max;
   }
 
   if (min && max && min >= max) {
