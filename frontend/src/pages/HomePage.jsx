@@ -1,4 +1,4 @@
-import { Rotate3d, Loader, Globe, Pencil, X, Check } from "lucide-react";
+import { LoaderCircle, Pencil, X, Check } from "lucide-react";
 import { transactionStore } from "../store/transactionStore";
 import { useEffect, useState } from "react";
 import Filter from "../components/Filter";
@@ -6,10 +6,12 @@ import Pagination from "../components/Pagination";
 import TransactionsNotFound from "../components/TransactionsNotFound";
 import convertDate from "../lib/convertDate";
 import EthData from "../components/EthData";
+import { etherscanStore } from "../store/etherscanStore";
 
 const HomePage = () => {
-  const { transactions, getTransactions, isTransactionsLoading, editAmount } =
+  const { transactions, getTransactions, editAmount, isTransactionsLoading } =
     transactionStore();
+  const { getEthLastPrice } = etherscanStore();
 
   const [editingId, setEditingId] = useState(null);
   const [editedAmount, setEditedAmount] = useState("");
@@ -22,6 +24,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getTransactions();
+    getEthLastPrice();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -54,76 +57,66 @@ const HomePage = () => {
               </tr>
             </thead>
             <tbody>
-              {isTransactionsLoading ? (
-                <tr>
-                  <td colSpan={8}>
-                    <div className="flex justify-center items-center h-[500px]">
-                      <Loader className="animate-spin w-10 h-10 text-primary" />
-                    </div>
+              {transactions.map((item) => (
+                <tr key={item._id}>
+                  <td className="max-w-[200px] truncate" title={item.hash}>
+                    {item.hash}
+                  </td>
+                  <td className="max-w-[200px] truncate">{item.method}</td>
+                  <td className="max-w-[200px] truncate">
+                    {convertDate(item.date)}
+                  </td>
+                  <td className="max-w-[200px] truncate"> {item.from}</td>
+                  <td className="max-w-[200px] truncate"> {item.to}</td>
+
+                  <td className="max-w-[200px] truncate group">
+                    {/* Editing Amount Logic */}
+                    {editingId !== item._id ? (
+                      <div className="truncate flex items-center justify-between gap-2">
+                        <span>${Number(item.amount).toLocaleString()}</span>
+                        <button
+                          onClick={() => {
+                            setEditingId(item._id);
+                            setEditedAmount(item.amount);
+                          }}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                        >
+                          <Pencil className="size-3" />
+                        </button>
+                      </div>
+                    ) : (
+                      <form
+                        onSubmit={handleSubmit}
+                        className="flex items-center justify-between w-full"
+                      >
+                        <div className="relative ">
+                          <input
+                            type="text"
+                            value={editedAmount}
+                            onChange={(e) => setEditedAmount(e.target.value)}
+                            className="input input-xs md:input-md w-full "
+                          />
+                          <div className="absolute right-1 top-1/2 -translate-y-1/2 flex gap-1">
+                            <button
+                              type="button"
+                              onClick={() => setEditingId(null)}
+                            >
+                              <X className="text-red-500 size-4 cursor-pointer" />
+                            </button>
+                            <button type="submit">
+                              <Check className="text-green-500 size-4 cursor-pointer" />
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    )}
+                  </td>
+                  <td className="max-w-[200px] truncate">
+                    {" "}
+                    ${+item.fee.toFixed(2)}
                   </td>
                 </tr>
-              ) : (
-                transactions.map((item) => (
-                  <tr key={item._id}>
-                    <td className="max-w-[200px] truncate" title={item.hash}>
-                      {item.hash}
-                    </td>
-                    <td className="max-w-[200px] truncate">{item.method}</td>
-                    <td className="max-w-[200px] truncate">
-                      {convertDate(item.date)}
-                    </td>
-                    <td className="max-w-[200px] truncate"> {item.from}</td>
-                    <td className="max-w-[200px] truncate"> {item.to}</td>
-
-                    <td className="max-w-[200px] truncate group">
-                      {/* Editing Amount Logic */}
-                      {editingId !== item._id ? (
-                        <div className="truncate flex items-center justify-between gap-2">
-                          <span>${Number(item.amount).toLocaleString()}</span>
-                          <button
-                            onClick={() => {
-                              setEditingId(item._id);
-                              setEditedAmount(item.amount);
-                            }}
-                            className="opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-                          >
-                            <Pencil className="size-3" />
-                          </button>
-                        </div>
-                      ) : (
-                        <form
-                          onSubmit={handleSubmit}
-                          className="flex items-center justify-between w-full"
-                        >
-                          <div className="relative ">
-                            <input
-                              type="text"
-                              value={editedAmount}
-                              onChange={(e) => setEditedAmount(e.target.value)}
-                              className="input input-xs md:input-md w-full "
-                            />
-                            <div className="absolute right-1 top-1/2 -translate-y-1/2 flex gap-1">
-                              <button
-                                type="button"
-                                onClick={() => setEditingId(null)}
-                              >
-                                <X className="text-red-500 size-4 cursor-pointer" />
-                              </button>
-                              <button type="submit">
-                                <Check className="text-green-500 size-4 cursor-pointer" />
-                              </button>
-                            </div>
-                          </div>
-                        </form>
-                      )}
-                    </td>
-                    <td className="max-w-[200px] truncate">
-                      {" "}
-                      ${+item.fee.toFixed(2)}
-                    </td>
-                  </tr>
-                ))
-              )}
+              ))}
             </tbody>
           </table>
         </div>

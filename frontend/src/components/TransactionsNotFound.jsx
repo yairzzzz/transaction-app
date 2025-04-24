@@ -12,7 +12,7 @@ const TransactionsNotFound = () => {
 
           <div className="h-full flex items-center justify-start flex-col text-center">
             <h1 className="text-xl sm:text-4xl font-bold text-primary ">
-              No Transactions Yet
+              Could Not Find Transactions
             </h1>{" "}
             <br /> <br />
             <p className="text-base-content text-xs sm:text-lg mb-5">

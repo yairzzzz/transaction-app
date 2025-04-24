@@ -28,11 +28,12 @@ export const transactionStore = create((set, get) => ({
           limit: data?.limit,
         },
       });
-      set({ transactions: response.data.data });
-      set({ totalCount: response.data.count });
+      const results = response.data;
+      set({ transactions: results.data });
+      set({ totalCount: results.count });
+      !results.data.length && set((get().filterQuery = {}));
     } catch (error) {
       console.log(error.message);
-      set({ transactions: [] });
     } finally {
       set({ isTransactionsLoading: false });
     }
@@ -62,11 +63,16 @@ export const transactionStore = create((set, get) => ({
     const transactions = get().transactions;
     try {
       const response = await transactionInstance.post("dummy", data);
-      set({ transactions: [...transactions, response.data.data] });
+      const tx = response.data.data;
+      set({ transactions: [...transactions, ...tx] });
+      set({ totalCount: tx.length });
+
       toast.success("Transactions generated successfully");
     } catch (error) {
       toast.error("Could not generate transactions");
       console.log(error.message);
+    } finally {
+      set({ isGeneratingDummyTransactions: false });
     }
   },
 }));

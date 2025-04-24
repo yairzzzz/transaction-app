@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { authStore } from "./store/authStore";
 import { useEffect } from "react";
 import { LoaderCircle } from "lucide-react";
-import TransactionsNotFound from "./components/TransactionsNotFound";
+
 import GeneratePage from "./pages/GeneratePage";
 
 function App() {
@@ -19,11 +19,6 @@ function App() {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
-
-  useEffect(() => {
-    console.log("authUser =", authUser);
-    console.log("isCheckingAuth =", isCheckingAuth);
-  }, [authUser, isCheckingAuth]);
 
   if (isCheckingAuth && !authUser) {
     return (

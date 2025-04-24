@@ -13,7 +13,7 @@ const Filter = () => {
       return toast.error("Please select valid dates");
     }
     if (filterQuery.min > filterQuery.max) {
-      return toast.error("Please select valid amount filtering");
+      return toast.error("Please select a valid filter amount ");
     }
 
     if (
@@ -22,7 +22,7 @@ const Filter = () => {
       !filterQuery.min &&
       !filterQuery.max
     ) {
-      return toast.error("Please select atleast one filtering");
+      return toast.error("Please select atleast one filter");
     }
     getTransactions(filterQuery);
   };

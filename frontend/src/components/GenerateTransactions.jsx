@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { X, LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import { transactionStore } from "../store/transactionStore";
 import { useNavigate } from "react-router-dom";
@@ -11,10 +11,12 @@ const GenerateTransactions = () => {
     method: "",
   });
 
-  const { generateDummyTransactions } = transactionStore();
+  const { generateDummyTransactions, isGeneratingDummyTransactions } =
+    transactionStore();
 
-  const handleSubmit = () => {
-    generateDummyTransactions(inputValues);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await generateDummyTransactions(inputValues);
     navigate("/");
   };
 
@@ -74,7 +76,11 @@ const GenerateTransactions = () => {
               />
             </fieldset>
             <button className="btn btn-primary sm:btn-md" type="submit">
-              Generate
+              {isGeneratingDummyTransactions ? (
+                <LoaderCircle className="animate-spin size-4" />
+              ) : (
+                "Generate"
+              )}
             </button>
           </form>
         </div>

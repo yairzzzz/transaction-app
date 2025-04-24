@@ -1,14 +1,10 @@
 import { Rotate3d, Globe, LoaderCircle } from "lucide-react";
 import eth from "../images/ethereum.png";
 import { etherscanStore } from "../store/etherscanStore";
-import { useEffect } from "react";
-const EthData = () => {
-  const { ethUsdLastPrice, ethBtcLastPrice, getEthLastPrice, isPriceLoading } =
-    etherscanStore();
 
-  useEffect(() => {
-    getEthLastPrice();
-  }, [ethUsdLastPrice, ethBtcLastPrice, getEthLastPrice]);
+const EthData = () => {
+  const { ethUsdLastPrice, ethBtcLastPrice, isPriceLoading } = etherscanStore();
+
   return (
     <div className="flex flex-col items-start md:flex-row md:justify-between py-5 px-4 mt-4 mb-4 sticky space-y-2 border-b-1 border-base-300 ">
       <div className="flex items-center space-x-2">
