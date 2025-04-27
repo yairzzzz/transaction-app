@@ -12,7 +12,6 @@ export const transactionStore = create((set, get) => ({
     const { filterQuery } = get();
     set({ filterQuery: { ...filterQuery, ...query } });
   },
-  resetFilterQuery: () => set({ filterQuery: {} }),
 
   getTransactions: async (data) => {
     set({ isTransactionsLoading: true });
@@ -31,6 +30,7 @@ export const transactionStore = create((set, get) => ({
       const results = response.data;
       set({ transactions: results.data });
       set({ totalCount: results.count });
+
       !results.data.length && set((get().filterQuery = {}));
     } catch (error) {
       console.log(error.message);

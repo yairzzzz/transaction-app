@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import TablePagination from "@mui/material/TablePagination";
 import { transactionStore } from "../store/transactionStore";
 
@@ -9,12 +9,18 @@ export default function Pagination() {
   const { getTransactions, totalCount, filterQuery, setFilterQuery } =
     transactionStore();
 
+  let timeout = useRef(); // makes timeout defined between renders. used for debounce logic below
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-    const currentQuery = { ...filterQuery, page: newPage };
-    setFilterQuery({ page: newPage });
 
-    getTransactions(currentQuery);
+    clearTimeout(timeout.current);
+    // debounce logic
+    timeout.current = setTimeout(() => {
+      const currentQuery = { ...filterQuery, page: newPage };
+      setFilterQuery({ page: newPage });
+
+      getTransactions(currentQuery);
+    }, 500);
   };
 
   const handleChangeRowsPerPage = (event) => {
