@@ -59,8 +59,16 @@ export const updateTransaction = async (req, res) => {
   const { id } = req.params; // Transaction _id
   const { newAmount } = req.body;
 
-  if (!id || newAmount == null) {
+  if (!id || !newAmount) {
     return res.status(400).json({ error: "Missing parameters" });
+  }
+
+  if (newAmount === null || isNaN(newAmount)) {
+    return res.status(400).json({ error: "Amount must be a valid number" });
+  }
+
+  if (newAmount > 10000000000) {
+    return res.status(400).json({ error: "Amount can't exceed $1B" });
   }
 
   try {

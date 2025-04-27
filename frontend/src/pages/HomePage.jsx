@@ -1,4 +1,4 @@
-import { LoaderCircle, Pencil, X, Check } from "lucide-react";
+import { Pencil, X, Check } from "lucide-react";
 import { transactionStore } from "../store/transactionStore";
 import { useEffect, useState } from "react";
 import Filter from "../components/Filter";
@@ -7,6 +7,7 @@ import TransactionsNotFound from "../components/TransactionsNotFound";
 import convertDate from "../lib/convertDate";
 import EthData from "../components/EthData";
 import { etherscanStore } from "../store/etherscanStore";
+import toast from "react-hot-toast";
 
 const HomePage = () => {
   const { transactions, getTransactions, editAmount, isTransactionsLoading } =
@@ -18,6 +19,23 @@ const HomePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (isNaN(editedAmount)) {
+      return toast.error("Amount must be a valid number");
+    }
+
+    const currentTx = transactions.find((tx) => tx._id === editingId);
+    const currentAmount = currentTx?.amount; // Prevent updating to the same amount
+    if (currentAmount === +editedAmount) {
+      return toast.error(
+        "Please choose a different amount than the previous one"
+      );
+    }
+
+    if (editedAmount > 999999999) {
+      return toast.error("Amount can't exceed 1B");
+    }
+
     editAmount(editingId, editedAmount);
     setEditingId(null);
   };
@@ -73,7 +91,7 @@ const HomePage = () => {
                     {/* Editing Amount Logic */}
                     {editingId !== item._id ? (
                       <div className="truncate flex items-center justify-between gap-2">
-                        <span>${Number(item.amount).toLocaleString()}</span>
+                        <span>${item.amount.toLocaleString()}</span>
                         <button
                           onClick={() => {
                             setEditingId(item._id);
@@ -94,7 +112,7 @@ const HomePage = () => {
                             type="text"
                             value={editedAmount}
                             onChange={(e) => setEditedAmount(e.target.value)}
-                            className="input input-xs md:input-md w-full "
+                            className="input input-xs md:input-md "
                           />
                           <div className="absolute right-1 top-1/2 -translate-y-1/2 flex gap-1">
                             <button
