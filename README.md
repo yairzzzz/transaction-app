@@ -15,6 +15,7 @@ A full-stack web application for securely managing and viewing cryptocurrency tr
 - 🔐 **JWT Authentication** – Secure login-protected dashboard
 - 📊 **Transaction Table** – View formatted crypto transactions
 - 📄 **Dynamic Pagination** – Efficient browsing through transaction history
+- ⏳ **Debounced Pagination** – Smooth page changes by reducing unnecessary API calls
 - 🔎 **Advanced Filtering** – Filter by date range, minimum and maximum amounts
 - ✏️ **Inline Editing** – Edit transaction amounts directly in the table
 - 🎨 **Responsive UI** – Fully responsive layout using Tailwind CSS and DaisyUI
