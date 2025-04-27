@@ -45,7 +45,7 @@ A full-stack web application for securely managing and viewing cryptocurrency tr
 ## 🔐 Authentication Flow
 
 - User logs in and receives a signed JWT token
-- Token is stored in `localStorage`
+- Token is stored in `cookies`
 - All protected routes validate the token on request
 - Backend verifies the token for authorization
 
